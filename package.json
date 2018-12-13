@@ -1,0 +1,51 @@
+{
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "@types/react": "^16.7.17",
+    "@types/react-dom": "^16.0.11",
+    "babel-loader": "^8.0.4",
+    "prettier": "^1.15.3",
+    "ts-loader": "^5.3.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.2.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "style-loader": "^0.23.1",
+    "css-loader": "^2.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0"
+  },
+  "name": "theia",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --open --mode development"
+  },
+  "dependencies": {
+    "@theia/callhierarchy": "next",
+    "@theia/core": "next",
+    "@theia/file-search": "next",
+    "@theia/git": "next",
+    "@theia/json": "next",
+    "@theia/markers": "next",
+    "@theia/merge-conflicts": "next",
+    "@theia/messages": "next",
+    "@theia/mini-browser": "next",
+    "@theia/navigator": "next",
+    "@theia/outline-view": "next",
+    "@theia/preferences": "next",
+    "@theia/preview": "next",
+    "@theia/search-in-workspace": "next",
+    "@theia/terminal": "next",
+    "@theia/textmate-grammars": "next",
+    "@theia/typescript": "next",
+    "inversify": "^5.0.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "webpack-dev-server": "^3.1.10"
+  }
+}

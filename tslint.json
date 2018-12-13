@@ -1,0 +1,13 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "no-submodule-imports": [true,
+            "@theia/core",
+        ],
+    },
+    "rulesDirectory": []
+}
