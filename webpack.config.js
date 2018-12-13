@@ -1,5 +1,8 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 module.exports = {
+  node: {
+    net: "mock",
+  },
   module: {
     rules: [
       {
@@ -16,12 +19,12 @@ module.exports = {
         ]
       },
       {
-        test: /\\.css$/,
-        exclude: /\\.useable\\.css$/,
-        loader: 'style-loader!css-loader'
+        test: /\.css$/,
+        exclude: /\.useable\.css$/,
+        use: ['style-loader', 'css-loader']
       },
       {
-        test: /\\.useable\\.css$/,
+        test: /\.useable\.css$/,
         use: [
           {
             loader: 'style-loader/useable',
@@ -32,6 +35,21 @@ module.exports = {
           },
           'css-loader'
         ]
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+      },
+      {
+        test: /\.(jpg|png|gif)$/,
+        loader: 'file-loader',
+        options: {
+            name: '[path][name].[hash].[ext]',
+        }
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000&mimetype=application/font-woff"
       }
     ]
   },
