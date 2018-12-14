@@ -1,0 +1,18 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#react-container {
+    position: relative;
+    flex: 1;
+}
+
+.shared-header {
+    background-color: red;
+    padding: 10px
+}

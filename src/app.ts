@@ -10,39 +10,35 @@ import { loggerFrontendModule } from '@theia/core/lib/browser/logger-frontend-mo
 import browserMenuModule from '@theia/core/lib/browser/menu/browser-menu-module';
 import { ThemeService } from '@theia/core/lib/browser/theming';
 
-class MyFrontendApplication extends FrontendApplication {
-  protected getHost(): Promise<HTMLElement> {
-      const element = document.getElementById("react-container");
-      if (element != null) {
-        return Promise.resolve(element);
-      }
-      throw new Error("Couldn't find container")
+import "./index.css";
+
+const getFrontendModule = (host: HTMLElement) => new ContainerModule((_bind, _unbind, _isBound, rebind) => {
+  class MyFrontendApplication extends FrontendApplication {
+    protected getHost(): Promise<HTMLElement> {
+      return Promise.resolve(host);
+    }
   }
-}
 
-const runApplication = () => {
-  const frontendAppModule = new ContainerModule((bind, unbind, isBound, rebind) => {
-    rebind(FrontendApplication).to(MyFrontendApplication).inSingletonScope();
-  });
+  rebind(FrontendApplication).to(MyFrontendApplication).inSingletonScope();
+});
 
-
+export const runApplication = (appElement: HTMLElement) => {
   FrontendApplicationConfigProvider.set({
     applicationName: "Theia"
   })
 
   const container = new Container();
-  container.load(frontendAppModule); // Commenting this line and the one below makes it work
   container.load(browserMenuModule);
   container.load(frontendApplicationModule);
   container.load(messagingFrontendModule);
   container.load(loggerFrontendModule);
+  container.load(getFrontendModule(appElement));
 
   try {
       const themeService = ThemeService.get();
       themeService.loadUserTheme();
 
-      // const application = container.get(FrontendApplication);
-      const application = container.get(MyFrontendApplication);  // Commenting this line and the one above makes it work
+      const application = container.get(FrontendApplication);
       application.start();
   } catch (error) {
     console.error('Failed to start the frontend application.');
@@ -52,4 +48,3 @@ const runApplication = () => {
   }
 }
 
-runApplication();
